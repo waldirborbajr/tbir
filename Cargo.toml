@@ -1,0 +1,35 @@
+[package]
+name = "tbir"
+version = "0.1.0"
+edition = "2021"
+authors = ["Waldir Borba Junior <wborbajr@gmail.com>"]
+description = "TBiR Telegram Bot in Rust!"
+repository = "https://github.com/waldirborbajr/tbir"
+homepage = "https://github.com/waldirborbajr/tbir"
+readme = "README.md"
+keywords = ["tbir", "telegram", "bot", "rust"]
+license = "MIT"
+
+[[bin]]
+name = "tbir"
+path = "src/main.rs"
+
+[build]
+rustflags = ["-z", "threads=8"]
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
+strip = true
+opt-level = 'z'   # only have smaller size after strip
+rpath = true
+debug = false
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rusqlite = "0.30.0"
+teloxide = { version = "0.12.2", features = ["macros"] }
+tokio = { version = "1.15.0", features = ["rt-multi-thread", "macros", "time"] }
+tokio-stream = "0.1.8"
